@@ -5,6 +5,8 @@ const commands = [
         help - Displays all commands available
         pwd - Prints the present directory
         ls - Lists the files in the present directory
+        open - open files/links 
+        cd - Change directory
         `
     }
 ];
