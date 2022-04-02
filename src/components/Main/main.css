@@ -15,3 +15,8 @@ textarea{
 .command{
     display: block;
 }
+
+.display-content{
+    color:white;
+    font-weight: 600;
+}

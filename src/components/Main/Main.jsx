@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import Banner from "../Utilities/Banner/banner.jsx";
 import "./main.css"
 import commandexecute from "../Utilities/Commands/commandexecute.js";
+import checkIfPathExists from "../Utilities/Commands/AllPaths.js";
 const Main = () => {
-    const [path,updatePath] = useState("");
+    // const [path,updatePath] = useState(null);
     const [commands,updateCommands] = useState(['']);
     let backCommands = 0;
+    let path = "";
     const handleKeyPress = (event) => {
         if(event.key === "ArrowUp"){
             console.log(backCommands);
@@ -26,19 +28,40 @@ const Main = () => {
             triggeredEvent.value=newCommand;
 
         }
-        if(event.key === 'Enter'){
-            event.target.disabled=true;
-            const response = commandexecute(event.target.value,path);
-            const responseDisplay = <pre><span className="command text-white">{response}</span></pre>
+        if (event.key === 'Enter') {
+            event.target.disabled = true;
+            event.preventDefault();
+            var temp = "";
+            const p = event.target.value.split(" ");
+            if (p.length === 2 && p[0] === "cd") { 
+                if (checkIfPathExists(p[1]))
+                    if (p[1] === "..")
+                        path = "";
+                    else
+                        if (path === " ")
+                            path = "/" + p[1];
+                        else {
+                            if (path.length > 2) {
+                                temp = "Directory not found";              
+                            }
+                            else
+                            path = "/" + path + p[1];
+                        }
+                else
+                    temp = "Directory not found";    
+            }
+          console.log(path)
+            const response = p[0]==="cd"?temp:commandexecute(event.target.value,path);
+            const responseDisplay = <div className="display-content utility text-white"><span className="command text-white">{response}</span></div>
             terminal.push(responseDisplay);
-            terminal.push(<span className="command text-mainGreen font-semibold">root@diganta-portfolio:~<span className="text-blue">$ </span><input type="text" className="utility text-white" autoFocus onBlur={({ target }) => target.focus()} onKeyDown={handleKeyPress}/></span>)
+            terminal.push(<span className="command text-mainGreen font-semibold">root@diganta-portfolio{path}:~<span className="text-blue">$ </span><input type="text" className="utility text-white" autoFocus onBlur={({ target }) => target.focus()} onKeyDown={handleKeyPress}/></span>)
             updateTerminal([...terminal])
             const newCommands = commands.push(event.target.value);
             updateCommands(newCommands);
             backCommands = commands.length-1;
         }
       }
-    const [terminal,updateTerminal] = useState([<span className="command text-mainGreen font-semibold">root@diganta-portfolio:~<span className="text-blue">$ </span><input type="text" className="utility text-white" autoFocus onBlur={({ target }) => target.focus()} onKeyDown={handleKeyPress}/></span>]);
+    const [terminal, updateTerminal] = useState([<span className="command text-mainGreen font-semibold">root@diganta-portfolio:~<span className="text-blue">$ </span><input type="text" className="utility text-white" autoFocus onBlur={({ target }) => target.focus()} onKeyDown={handleKeyPress}/></span>]);
 
     return (
         
