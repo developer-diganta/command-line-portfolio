@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/command-line-portfolio/static/css/main.099a7aa4.css",
+    "main.js": "/command-line-portfolio/static/js/main.f535310c.js",
+    "index.html": "/command-line-portfolio/index.html",
+    "main.099a7aa4.css.map": "/command-line-portfolio/static/css/main.099a7aa4.css.map",
+    "main.f535310c.js.map": "/command-line-portfolio/static/js/main.f535310c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.099a7aa4.css",
+    "static/js/main.f535310c.js"
+  ]
+}
