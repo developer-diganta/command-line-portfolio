@@ -66,7 +66,7 @@ const Main = () => {
     return (
         
         <div>
-            <pre className="text-white">{Banner}</pre> 
+            <pre className="hidden xl:block text-white">{Banner}</pre> 
             <div className="text-white mt-3 w-1/2">
                 Welcome to Diganta's command line portfolio.
                 Start with $help to know the commands for this interface.

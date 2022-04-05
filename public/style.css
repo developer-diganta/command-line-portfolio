@@ -1,5 +1,10 @@
 body{
     margin:0;
     padding:0;
-    background-color: rgb(17, 17, 17);
+    background: rgb(17, 17, 17) !important;
+}
+.body{
+    margin:0;
+    padding:0;
+    background: rgb(17, 17, 17) !important;
 }
